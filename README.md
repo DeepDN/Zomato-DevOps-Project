@@ -31,7 +31,6 @@ In this **DevOps project**, I demonstrate how to **deploy a ZOMATO Clone App** u
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=youtube&logoColor=white)](https://youtu.be/GyoI6-I68aQ)
 
 
----
 
 ---
 
@@ -50,6 +49,9 @@ After deploying the app, please share your opinion on LinkedIn along with the Pr
 <img src="https://media.licdn.com/dms/image/v2/D4D03AQHMQDSm9Tfq2Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1729761316154?e=2147483647&v=beta&t=abZhdf1PZikY5i4jwQoXTdSy6cmDhl_8kMtOEPvV9HM" alt="Deepak Profile Image" width="100" height="100" style="border-radius:50%;">
 
 Deepak Nemade
+
+---
+
 
 
 
