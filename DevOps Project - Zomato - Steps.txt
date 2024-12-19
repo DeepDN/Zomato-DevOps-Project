@@ -1,7 +1,8 @@
-DevOps Project - Kastro
+Steps
+DevOps Project - Deepak
 Deployment of ZOMATO Project
 --------------------------------------------
-Repo URL: https://github.com/KastroVKiran/DevOps-Project-Zomato-Kastro.git
+Repo URL: https://github.com/DeepDN/Zomato-DevOps-Project.git
 
 
 1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)
