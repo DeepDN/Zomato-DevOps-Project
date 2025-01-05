@@ -52,6 +52,17 @@ Deepak Nemade
 
 ---
 
+---
+
+## 📸 Screenshots
+![ZOMATO App UI](./images/Screenshot from 2025-01-05 11-47-51.png)
+![Deployment Pipeline](./images/Screenshot from 2025-01-05 11-48-25.png)
+![Sonarqube Code Check](./images/Screenshot from 2025-01-05 11-48-03.png)
+![Dpckerhub Image Repository](./images/Screenshot from 2025-01-05 11-48-16.png)
+
+---
+
+
 
 
 
