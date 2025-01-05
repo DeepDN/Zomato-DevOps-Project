@@ -1,27 +1,37 @@
-Steps
-DevOps Project - Deepak
-Deployment of ZOMATO Project
---------------------------------------------
+Deployment of Zomato Project - DevOps Guide
+
+Overview
+
+This document provides a step-by-step guide to set up and deploy the Zomato project using Jenkins, Docker, SonarQube, Trivy, and other DevOps tools. The repository URL is:
+
 Repo URL: https://github.com/DeepDN/Zomato-DevOps-Project.git
 
+Steps to Deploy the Zomato Project
 
-1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)
+1. Launch an Instance
 
-2. Connect to the instance
+Instance Type: Ubuntu 24.04, t2.large, 30 GB.
 
-3. Update the packages
-$ switch to root user ---> sudo su
-$ sudo apt update -y
+Connect to the instance using SSH.
 
-4. Install AWS CLI
+2. Update the Packages
+
+sudo su
+sudo apt update -y
+
+3. Install AWS CLI
+
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
-5. Install Jenkins on Ubuntu
-(Reference URL for commands: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
-#!/bin/bash
+4. Install Jenkins
+
+Reference: Jenkins Installation Guide
+
+Commands:
+
 sudo apt update -y
 wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
 echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
@@ -35,25 +45,26 @@ sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 sudo systemctl status jenkins
 
-Verifiy Jenkins installation: jenkins --version
+Verify Jenkins installation:
 
-5.1. Open Port No. 8080 for VM and access Jenkins
-5.2. Setup Jenkins by following the necessary steps
+jenkins --version
 
-6. Install Docker on Ubuntu
-(Reference URL for commands: https://docs.docker.com/engine/install/ubuntu/)
+Open Port 8080 on the VM to access Jenkins.
 
-# Add Docker's official GPG key:
+Follow the initial setup steps for Jenkins.
+
+5. Install Docker
+
+Reference: Docker Installation Guide
+
+Commands:
+
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo \  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 sudo usermod -aG docker ubuntu
@@ -61,59 +72,80 @@ sudo chmod 777 /var/run/docker.sock
 newgrp docker
 sudo systemctl status docker
 
-Verifiy Docker installation: docker --version
+Verify Docker installation:
 
-7. Install Trivy on Ubuntu
-(Reference URL for commands: https://aquasecurity.github.io/trivy/v0.55/getting-started/installation/)
+docker --version
+
+6. Install Trivy
+
+Reference: Trivy Installation Guide
+
+Commands:
+
 sudo apt-get install wget apt-transport-https gnupg
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
 sudo apt-get update
 sudo apt-get install trivy
 
-Verifiy Trivy installation: trivy --version
+Verify Trivy installation:
 
-8. Install Docker Scout
-Make sure to Login to DockerHub account in browser
-<Follow the process as explained in the video>
+trivy --version
 
-9. Install SonarQube using Docker
-$ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
-$ docker ps (You can see SonarQube container)
+7. Install Docker Scout
 
-<Follow the process as explained in the video>
+Log in to DockerHub on your browser.
 
-10. Installation of Plugins in Jenkins
-Install below plugins:
-<Follow the process as explained in the video>
+Follow the process in the reference video to install Docker Scout.
 
-11. SonarQube configuration in Jenkins
-<Follow the process as explained in the video>
+8. Install SonarQube Using Docker
 
-11.1. Tools Configuration in Jenkins
-<Follow the process as explained in the video>
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+docker ps
 
-11.2. Configuration of SonarQube Token in Jenkins
-<Follow the process as explained in the video>
+Follow the setup process in the reference video.
 
-Lets create another credentials for DockerHub. This is being done because, as soon as the docker image is created, it should get pushed to dockerhub. 
-<Follow the process as explained in the video>
+9. Install Required Jenkins Plugins
 
-11.3 Configuration of Email notification in Jenkins
-As soon as the build happens, i need to get an email notification to do that we have to configure our email.
-<Follow the process as explained in the video>
+Install plugins like:
 
+Eclipse Temurin Installer
 
-12. System Configuration in Jenkins
-<Follow the process as explained in the video>
+SonarQube Scanner
 
-13. Create webhook in SonarQube
-<Follow the process as explained in the video>
+NodeJS
 
-14. Create Pipeline Job
-Before pasting the pipeline script, do the following changes in the script
-1. In the stage 'Tag and Push to DockerHub', give your docker-hub username. Similar thing you should do in 'DockerScoutImage', 'Deploy to container' stages
-2. In post actions stage in pipeline, make sure to give the email id you have configured in jenkins.
+OWASP Dependency-Check
+
+Docker, Docker Pipeline, Docker Build Step, Docker API
+
+Prometheus Metrics
+
+Email Extension
+
+10. Configure Tools in Jenkins
+
+SonarQube Configuration:
+
+Generate a SonarQube token.
+
+Add the token in Jenkins credentials.
+
+Set up a webhook in SonarQube to connect with Jenkins.
+
+DockerHub Credentials:
+
+Add DockerHub credentials to Jenkins to push Docker images.
+
+Email Notification:
+
+Configure email notifications in Jenkins.
+
+11. Create the Pipeline Job
+
+Create a pipeline job in Jenkins.
+
+Use the following pipeline script (make adjustments for DockerHub username and email ID):
 
 *********************
 Pipeline Script
@@ -128,43 +160,43 @@ pipeline {
         SCANNER_HOME=tool 'sonar-scanner'
     }
     stages {
-        stage ("clean workspace") {
+        stage ("Clean Workspace") {
             steps {
                 cleanWs()
             }
         }
         stage ("Git Checkout") {
             steps {
-                git 'https://github.com/KastroVKiran/Zomato-Project-Kastro.git'
+                git 'https://github.com/DeepDN/Zomato-DevOps-Project.git'
             }
         }
-        stage("Sonarqube Analysis"){
-            steps{
+        stage("SonarQube Analysis") {
+            steps {
                 withSonarQubeEnv('sonar-server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=zomato \
                     -Dsonar.projectKey=zomato '''
                 }
             }
         }
-        stage("Code Quality Gate"){
-           steps {
+        stage("Code Quality Gate") {
+            steps {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
                 }
-            } 
+            }
         }
         stage("Install NPM Dependencies") {
             steps {
                 sh "npm install"
             }
         }
-        stage('OWASP FS SCAN') {
+        stage('OWASP Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit -n', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-    }
-}
-        stage ("Trivy File Scan") {
+            }
+        }
+        stage("Trivy File Scan") {
             steps {
                 sh "trivy fs . > trivy.txt"
             }
@@ -178,54 +210,51 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker tag zomato kastrov/zomato:latest "
-                        sh "docker push kastrov/zomato:latest "
+                        sh "docker tag zomato deepakdn999/zomato:latest"
+                        sh "docker push deepakdn999/zomato:latest"
                     }
-                }
-            }
-        }
-        stage('Docker Scout Image') {
-            steps {
-                script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview kastrov/zomato:latest'
-                       sh 'docker-scout cves kastrov/zomato:latest'
-                       sh 'docker-scout recommendations kastrov/zomato:latest'
-                   }
                 }
             }
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 kastrov/zomato:latest'
+                script {
+                    sh '''
+                    # Stop and remove existing container if exists
+                    docker rm -f zomato || true
+                    # Deploy the new container
+                    docker run -d --name zomato -p 3000:3000 deepakdn999/zomato:latest
+                    '''
+                }
             }
         }
     }
     post {
-    always {
-        emailext attachLog: true,
-            subject: "'${currentBuild.result}'",
-            body: """
-                <html>
-                <body>
-                    <div style="background-color: #FFA07A; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">Project: ${env.JOB_NAME}</p>
-                    </div>
-                    <div style="background-color: #90EE90; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">Build Number: ${env.BUILD_NUMBER}</p>
-                    </div>
-                    <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">URL: ${env.BUILD_URL}</p>
-                    </div>
-                </body>
-                </html>
-            """,
-            to: 'kastrokiran@gmail.com',
-            mimeType: 'text/html',
-            attachmentsPattern: 'trivy.txt'
+        always {
+            emailext attachLog: true,
+                subject: "'${currentBuild.result}'",
+                body: """
+                    <html>
+                    <body>
+                        <div style="background-color: #FFA07A; padding: 10px; margin-bottom: 10px;">
+                            <p style="color: white; font-weight: bold;">Project: ${env.JOB_NAME}</p>
+                        </div>
+                        <div style="background-color: #90EE90; padding: 10px; margin-bottom: 10px;">
+                            <p style="color: white; font-weight: bold;">Build Number: ${env.BUILD_NUMBER}</p>
+                        </div>
+                        <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
+                            <p style="color: white; font-weight: bold;">URL: ${env.BUILD_URL}</p>
+                        </div>
+                    </body>
+                    </html>
+                """,
+                to: 'nemadedeepak1111@gmail.com',
+                mimeType: 'text/html',
+                attachmentsPattern: 'trivy.txt'
         }
     }
 }
+
 
 
 
