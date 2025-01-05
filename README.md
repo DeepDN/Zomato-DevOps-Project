@@ -35,22 +35,22 @@ In this **DevOps project**, I demonstrate how to **deploy a ZOMATO Clone App** u
 ## 📸 Deployment Screenshots
 
 ### 1️⃣ **ZOMATO App UI**
-![ZOMATO App UI](./images/Screenshot_from_2025-01-05_11-47-51.png)
+![ZOMATO App UI](./images/Screenshot from 2025-01-05 11-47-51.png)
 
 ---
 
 ### 2️⃣ **Jenkins Deployment Pipeline**
-![Deployment Pipeline](./images/Screenshot_from_2025-01-05_11-48-25.png)
+![Deployment Pipeline](./images/Screenshot from 2025-01-05 11-48-25.png)
 
 ---
 
 ### 3️⃣ **SonarQube Code Scan Results**
-![SonarQube Code Check](./images/Screenshot_from_2025-01-05_11-48-03.png)
+![SonarQube Code Check](./images/Screenshot from 2025-01-05 11-48-03.png)
 
 ---
 
 ### 4️⃣ **Docker Hub Repository**
-![Docker Hub Repository](./images/Screenshot_from_2025-01-05_11-48-16.png)
+![Docker Hub Repository](./images/Screenshot from 2025-01-05 11-48-16.png)
 
 ---
 
